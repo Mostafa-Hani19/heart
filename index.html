@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Heart with Light - قلب مع نور</title>
+    <title> نور</title>
     <style>
         * {
             margin: 0;
@@ -16,10 +16,39 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            font-family: 'Arial', sans-serif;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(255, 107, 157, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(99, 102, 241, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(236, 72, 153, 0.2) 0%, transparent 50%),
+                linear-gradient(135deg, #0f0c29 0%, #302b63 25%, #24243e 50%, #1a1a2e 75%, #16213e 100%);
+            font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
             overflow: hidden;
             position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 50% 50%, rgba(255, 107, 157, 0.1) 0%, transparent 70%),
+                radial-gradient(circle at 30% 30%, rgba(99, 102, 241, 0.1) 0%, transparent 70%);
+            animation: backgroundPulse 8s ease-in-out infinite;
+            z-index: 0;
+        }
+
+        @keyframes backgroundPulse {
+            0%, 100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.8;
+                transform: scale(1.1);
+            }
         }
 
         /* قلوب الخلفية */
@@ -38,7 +67,11 @@
             fill: none;
             stroke: rgba(255, 107, 157, 0.2);
             stroke-width: 2;
-            animation: floatHeart 20s ease-in-out infinite;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            stroke-dasharray: 400;
+            stroke-dashoffset: 400;
+            animation: drawBgHeart 2s ease-in-out forwards, floatHeart 20s ease-in-out 2s infinite;
         }
 
         .bg-heart:nth-child(1) {
@@ -46,7 +79,9 @@
             left: 10%;
             width: 60px;
             height: 60px;
-            animation-delay: 0s;
+            stroke-dasharray: 350;
+            stroke-dashoffset: 350;
+            animation: drawBgHeart 2s ease-in-out 0.2s forwards, floatHeart 20s ease-in-out 2.2s infinite;
         }
 
         .bg-heart:nth-child(2) {
@@ -54,7 +89,9 @@
             right: 15%;
             width: 40px;
             height: 40px;
-            animation-delay: 2s;
+            stroke-dasharray: 250;
+            stroke-dashoffset: 250;
+            animation: drawBgHeart 1.5s ease-in-out 0.4s forwards, floatHeart 20s ease-in-out 1.9s infinite;
         }
 
         .bg-heart:nth-child(3) {
@@ -62,7 +99,9 @@
             left: 20%;
             width: 50px;
             height: 50px;
-            animation-delay: 4s;
+            stroke-dasharray: 300;
+            stroke-dashoffset: 300;
+            animation: drawBgHeart 1.8s ease-in-out 0.6s forwards, floatHeart 20s ease-in-out 2.4s infinite;
         }
 
         .bg-heart:nth-child(4) {
@@ -70,7 +109,9 @@
             right: 25%;
             width: 45px;
             height: 45px;
-            animation-delay: 6s;
+            stroke-dasharray: 280;
+            stroke-dashoffset: 280;
+            animation: drawBgHeart 1.6s ease-in-out 0.8s forwards, floatHeart 20s ease-in-out 2.4s infinite;
         }
 
         .bg-heart:nth-child(5) {
@@ -78,7 +119,9 @@
             right: 10%;
             width: 55px;
             height: 55px;
-            animation-delay: 8s;
+            stroke-dasharray: 320;
+            stroke-dashoffset: 320;
+            animation: drawBgHeart 1.7s ease-in-out 1s forwards, floatHeart 20s ease-in-out 2.7s infinite;
         }
 
         .bg-heart:nth-child(6) {
@@ -86,7 +129,9 @@
             left: 30%;
             width: 35px;
             height: 35px;
-            animation-delay: 10s;
+            stroke-dasharray: 220;
+            stroke-dashoffset: 220;
+            animation: drawBgHeart 1.4s ease-in-out 1.2s forwards, floatHeart 20s ease-in-out 2.6s infinite;
         }
 
         .bg-heart:nth-child(7) {
@@ -94,7 +139,9 @@
             left: 50%;
             width: 48px;
             height: 48px;
-            animation-delay: 12s;
+            stroke-dasharray: 270;
+            stroke-dashoffset: 270;
+            animation: drawBgHeart 1.6s ease-in-out 1.4s forwards, floatHeart 20s ease-in-out 3s infinite;
         }
 
         .bg-heart:nth-child(8) {
@@ -102,7 +149,15 @@
             right: 40%;
             width: 42px;
             height: 42px;
-            animation-delay: 14s;
+            stroke-dasharray: 260;
+            stroke-dashoffset: 260;
+            animation: drawBgHeart 1.5s ease-in-out 1.6s forwards, floatHeart 20s ease-in-out 3.1s infinite;
+        }
+
+        @keyframes drawBgHeart {
+            to {
+                stroke-dashoffset: 0;
+            }
         }
 
         @keyframes floatHeart {
@@ -144,9 +199,11 @@
         .heart svg {
             width: 100%;
             height: 100%;
-            filter: drop-shadow(0 0 20px rgba(255, 107, 157, 0.8)) 
-                    drop-shadow(0 0 40px rgba(255, 23, 68, 0.6))
-                    drop-shadow(0 0 60px rgba(194, 24, 91, 0.4));
+            filter: 
+                drop-shadow(0 0 30px rgba(255, 107, 157, 0.9)) 
+                drop-shadow(0 0 60px rgba(255, 23, 68, 0.7))
+                drop-shadow(0 0 90px rgba(194, 24, 91, 0.5))
+                drop-shadow(0 0 120px rgba(99, 102, 241, 0.3));
         }
 
         /* قلوب داخل القلب الكبير */
@@ -165,37 +222,265 @@
             left: 50%;
             transform: translate(-50%, -50%);
             fill: none;
-            stroke: rgba(255, 255, 255, 0.6);
-            stroke-width: 3;
-            animation: innerHeartBeat 2s ease-in-out infinite;
+            stroke: rgba(255, 255, 255, 0.7);
+            stroke-width: 2.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            stroke-dasharray: 600;
+            stroke-dashoffset: 600;
+            filter: drop-shadow(0 0 8px rgba(255, 107, 157, 0.6));
         }
 
+        /* قلوب متدرجة من الأصغر للأكبر */
         .inner-heart-1 {
-            width: 180px;
-            height: 180px;
-            animation-delay: 0s;
-            stroke: rgba(255, 107, 157, 0.7);
+            width: 8px;
+            height: 8px;
+            stroke: rgba(255, 255, 255, 1);
+            stroke-dasharray: 45;
+            stroke-dashoffset: 45;
+            filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.8));
+            animation: drawInnerHeart1 0.4s ease-in-out 0s forwards, syncAllHearts 2s ease-in-out 8s infinite;
         }
 
         .inner-heart-2 {
-            width: 140px;
-            height: 140px;
-            animation-delay: 0.3s;
-            stroke: rgba(255, 255, 255, 0.8);
+            width: 12px;
+            height: 12px;
+            stroke: rgba(255, 107, 157, 0.95);
+            stroke-dasharray: 65;
+            stroke-dashoffset: 65;
+            filter: drop-shadow(0 0 5px rgba(255, 107, 157, 0.7));
+            animation: drawInnerHeart2 0.4s ease-in-out 0.1s forwards, syncAllHearts 2s ease-in-out 8s infinite;
         }
 
         .inner-heart-3 {
-            width: 100px;
-            height: 100px;
-            animation-delay: 0.6s;
-            stroke: rgba(255, 23, 68, 0.7);
+            width: 18px;
+            height: 18px;
+            stroke: rgba(255, 255, 255, 1);
+            stroke-dasharray: 95;
+            stroke-dashoffset: 95;
+            filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.8));
+            animation: drawInnerHeart3 0.5s ease-in-out 0.2s forwards, syncAllHearts 2s ease-in-out 8s infinite;
         }
 
         .inner-heart-4 {
+            width: 25px;
+            height: 25px;
+            stroke: rgba(255, 23, 68, 0.85);
+            stroke-dasharray: 130;
+            stroke-dashoffset: 130;
+            filter: drop-shadow(0 0 7px rgba(255, 23, 68, 0.6));
+            animation: drawInnerHeart4 0.5s ease-in-out 0.3s forwards, syncAllHearts 2s ease-in-out 8s infinite;
+        }
+
+        .inner-heart-5 {
+            width: 35px;
+            height: 35px;
+            stroke: rgba(255, 255, 255, 0.95);
+            stroke-dasharray: 180;
+            stroke-dashoffset: 180;
+            filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.7));
+            animation: drawInnerHeart5 0.6s ease-in-out 0.4s forwards, syncAllHearts 2s ease-in-out 8s infinite;
+        }
+
+        .inner-heart-6 {
+            width: 50px;
+            height: 50px;
+            stroke: rgba(255, 107, 157, 0.85);
+            stroke-dasharray: 250;
+            stroke-dashoffset: 250;
+            filter: drop-shadow(0 0 10px rgba(255, 107, 157, 0.6));
+            animation: drawInnerHeart6 0.6s ease-in-out 0.5s forwards, syncAllHearts 2s ease-in-out 8s infinite;
+        }
+
+        .inner-heart-7 {
             width: 70px;
             height: 70px;
-            animation-delay: 0.9s;
-            stroke: rgba(255, 255, 255, 0.9);
+            stroke: rgba(255, 255, 255, 0.95);
+            stroke-dasharray: 300;
+            stroke-dashoffset: 300;
+            filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.7));
+            animation: drawInnerHeart7 0.7s ease-in-out 0.6s forwards, syncAllHearts 2s ease-in-out 8s infinite;
+        }
+
+        .inner-heart-8 {
+            width: 100px;
+            height: 100px;
+            stroke: rgba(255, 23, 68, 0.75);
+            stroke-dasharray: 400;
+            stroke-dashoffset: 400;
+            filter: drop-shadow(0 0 15px rgba(255, 23, 68, 0.5));
+            animation: drawInnerHeart8 0.8s ease-in-out 0.7s forwards, syncAllHearts 2s ease-in-out 8s infinite;
+        }
+
+        .inner-heart-9 {
+            width: 140px;
+            height: 140px;
+            stroke: rgba(255, 255, 255, 0.85);
+            stroke-dasharray: 550;
+            stroke-dashoffset: 550;
+            filter: drop-shadow(0 0 18px rgba(255, 255, 255, 0.6));
+            animation: drawInnerHeart9 1s ease-in-out 0.8s forwards, syncAllHearts 2s ease-in-out 8s infinite;
+        }
+
+        .inner-heart-10 {
+            width: 180px;
+            height: 180px;
+            stroke: rgba(255, 107, 157, 0.75);
+            stroke-dasharray: 700;
+            stroke-dashoffset: 700;
+            filter: drop-shadow(0 0 20px rgba(255, 107, 157, 0.5));
+            animation: drawInnerHeart10 1.2s ease-in-out 0.9s forwards, syncAllHearts 2s ease-in-out 8s infinite;
+        }
+
+        .inner-heart-11 {
+            width: 220px;
+            height: 220px;
+            stroke: rgba(255, 23, 68, 0.65);
+            stroke-dasharray: 850;
+            stroke-dashoffset: 850;
+            filter: drop-shadow(0 0 22px rgba(255, 23, 68, 0.4));
+            animation: drawInnerHeart11 1.3s ease-in-out 1s forwards, syncAllHearts 2s ease-in-out 8s infinite;
+        }
+
+        .inner-heart-12 {
+            width: 260px;
+            height: 260px;
+            stroke: rgba(255, 107, 157, 0.65);
+            stroke-dasharray: 1000;
+            stroke-dashoffset: 1000;
+            filter: drop-shadow(0 0 25px rgba(255, 107, 157, 0.4));
+            animation: drawInnerHeart12 1.4s ease-in-out 1.1s forwards, syncAllHearts 2s ease-in-out 8s infinite;
+        }
+
+        .inner-heart-13 {
+            width: 300px;
+            height: 300px;
+            stroke: rgba(255, 255, 255, 0.75);
+            stroke-dasharray: 1150;
+            stroke-dashoffset: 1150;
+            filter: drop-shadow(0 0 28px rgba(255, 255, 255, 0.5));
+            animation: drawInnerHeart13 1.5s ease-in-out 1.2s forwards, syncAllHearts 2s ease-in-out 8s infinite;
+        }
+
+        .inner-heart-14 {
+            width: 340px;
+            height: 340px;
+            stroke: rgba(255, 23, 68, 0.55);
+            stroke-dasharray: 1300;
+            stroke-dashoffset: 1300;
+            filter: drop-shadow(0 0 30px rgba(255, 23, 68, 0.35));
+            animation: drawInnerHeart14 1.6s ease-in-out 1.3s forwards, syncAllHearts 2s ease-in-out 8s infinite;
+        }
+
+        .inner-heart-15 {
+            width: 380px;
+            height: 380px;
+            stroke: rgba(255, 107, 157, 0.55);
+            stroke-dasharray: 1450;
+            stroke-dashoffset: 1450;
+            filter: drop-shadow(0 0 35px rgba(255, 107, 157, 0.35));
+            animation: drawInnerHeart15 1.7s ease-in-out 1.4s forwards, syncAllHearts 2s ease-in-out 8s infinite;
+        }
+
+        @keyframes syncAllHearts {
+            0%, 100% {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 0.8;
+            }
+            50% {
+                transform: translate(-50%, -50%) scale(1.05);
+                opacity: 1;
+            }
+        }
+
+        @keyframes drawInnerHeart1 {
+            to {
+                stroke-dashoffset: 0;
+            }
+        }
+
+        @keyframes drawInnerHeart2 {
+            to {
+                stroke-dashoffset: 0;
+            }
+        }
+
+        @keyframes drawInnerHeart3 {
+            to {
+                stroke-dashoffset: 0;
+            }
+        }
+
+        @keyframes drawInnerHeart4 {
+            to {
+                stroke-dashoffset: 0;
+            }
+        }
+
+        @keyframes drawInnerHeart5 {
+            to {
+                stroke-dashoffset: 0;
+            }
+        }
+
+        @keyframes drawInnerHeart6 {
+            to {
+                stroke-dashoffset: 0;
+            }
+        }
+
+        @keyframes drawInnerHeart7 {
+            to {
+                stroke-dashoffset: 0;
+            }
+        }
+
+        @keyframes drawInnerHeart8 {
+            to {
+                stroke-dashoffset: 0;
+            }
+        }
+
+        @keyframes drawInnerHeart9 {
+            to {
+                stroke-dashoffset: 0;
+            }
+        }
+
+        @keyframes drawInnerHeart10 {
+            to {
+                stroke-dashoffset: 0;
+            }
+        }
+
+        @keyframes drawInnerHeart11 {
+            to {
+                stroke-dashoffset: 0;
+            }
+        }
+
+        @keyframes drawInnerHeart12 {
+            to {
+                stroke-dashoffset: 0;
+            }
+        }
+
+        @keyframes drawInnerHeart13 {
+            to {
+                stroke-dashoffset: 0;
+            }
+        }
+
+        @keyframes drawInnerHeart14 {
+            to {
+                stroke-dashoffset: 0;
+            }
+        }
+
+        @keyframes drawInnerHeart15 {
+            to {
+                stroke-dashoffset: 0;
+            }
         }
 
         @keyframes innerHeartBeat {
@@ -211,32 +496,58 @@
 
         .heart-outer {
             fill: none;
-            stroke: #ff6b9d;
+            stroke: url(#heartGradient);
             stroke-width: 8;
             stroke-linecap: round;
             stroke-linejoin: round;
-            animation: strokeGlow 2s ease-in-out infinite;
+            stroke-dasharray: 1000;
+            stroke-dashoffset: 1000;
+            filter: drop-shadow(0 0 20px rgba(255, 107, 157, 0.8));
+            animation: drawHeart 3s ease-in-out forwards, strokeGlow 2s ease-in-out 3s infinite;
         }
 
         .heart-inner {
             fill: none;
-            stroke: rgba(255, 255, 255, 0.9);
+            stroke: rgba(255, 255, 255, 0.95);
             stroke-width: 4;
             stroke-linecap: round;
             stroke-linejoin: round;
-            filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.9))
-                    drop-shadow(0 0 30px rgba(255, 107, 157, 0.7));
-            animation: innerStrokeGlow 1.5s ease-in-out infinite;
+            stroke-dasharray: 800;
+            stroke-dashoffset: 800;
+            filter: 
+                drop-shadow(0 0 20px rgba(255, 255, 255, 0.9))
+                drop-shadow(0 0 40px rgba(255, 107, 157, 0.7))
+                drop-shadow(0 0 60px rgba(99, 102, 241, 0.5));
+            animation: drawHeartInner 2.5s ease-in-out 0.5s forwards, innerStrokeGlow 1.5s ease-in-out 3s infinite;
+        }
+
+        @keyframes drawHeart {
+            to {
+                stroke-dashoffset: 0;
+            }
+        }
+
+        @keyframes drawHeartInner {
+            to {
+                stroke-dashoffset: 0;
+            }
         }
 
         @keyframes strokeGlow {
             0%, 100% {
                 stroke: #ff6b9d;
                 opacity: 1;
+                filter: drop-shadow(0 0 20px rgba(255, 107, 157, 0.8)) drop-shadow(0 0 40px rgba(255, 23, 68, 0.6));
             }
-            50% {
+            33% {
                 stroke: #ff1744;
-                opacity: 0.9;
+                opacity: 0.95;
+                filter: drop-shadow(0 0 25px rgba(255, 23, 68, 0.9)) drop-shadow(0 0 50px rgba(236, 72, 153, 0.7));
+            }
+            66% {
+                stroke: #ec4899;
+                opacity: 0.95;
+                filter: drop-shadow(0 0 30px rgba(236, 72, 153, 0.9)) drop-shadow(0 0 60px rgba(99, 102, 241, 0.6));
             }
         }
 
@@ -256,18 +567,15 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 200px;
-            height: 200px;
-            background: radial-gradient(
-                circle,
-                rgba(255, 255, 255, 0.9) 0%,
-                rgba(255, 107, 157, 0.7) 30%,
-                rgba(255, 23, 68, 0.5) 50%,
-                transparent 70%
-            );
+            width: 250px;
+            height: 250px;
+            background: 
+                radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.9) 0%, transparent 40%),
+                radial-gradient(circle at 70% 70%, rgba(255, 107, 157, 0.8) 0%, transparent 50%),
+                radial-gradient(circle, rgba(255, 23, 68, 0.6) 0%, rgba(236, 72, 153, 0.4) 40%, transparent 70%);
             border-radius: 50%;
             animation: pulse 2s ease-in-out infinite;
-            filter: blur(20px);
+            filter: blur(25px);
             z-index: -1;
         }
 
@@ -276,20 +584,19 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 120px;
-            height: 120px;
-            background: radial-gradient(
-                circle,
-                rgba(255, 255, 255, 1) 0%,
-                rgba(255, 255, 255, 0.8) 20%,
-                rgba(255, 107, 157, 0.6) 40%,
-                rgba(255, 23, 68, 0.4) 60%,
-                transparent 80%
-            );
+            width: 140px;
+            height: 140px;
+            background: 
+                radial-gradient(circle at 40% 40%, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.9) 15%, transparent 35%),
+                radial-gradient(circle, rgba(255, 107, 157, 0.8) 0%, rgba(255, 23, 68, 0.6) 30%, rgba(236, 72, 153, 0.4) 50%, transparent 75%);
             border-radius: 50%;
             animation: innerGlow 1.5s ease-in-out infinite;
-            filter: blur(15px);
+            filter: blur(18px);
             z-index: 1;
+            box-shadow: 
+                0 0 40px rgba(255, 255, 255, 0.6),
+                0 0 80px rgba(255, 107, 157, 0.4),
+                0 0 120px rgba(255, 23, 68, 0.3);
         }
 
         .sparkles {
@@ -402,39 +709,70 @@
         .text-glow {
             font-size: 80px;
             font-weight: 900;
-            color: white;
+            background: linear-gradient(135deg, #ffffff 0%, #ff6b9d 30%, #ff1744 60%, #ec4899 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             text-shadow: 
-                0 0 20px rgba(255, 255, 255, 0.9),
-                0 0 40px rgba(255, 107, 157, 0.8),
-                0 0 60px rgba(255, 23, 68, 0.7),
-                0 0 80px rgba(255, 107, 157, 0.6),
-                0 0 100px rgba(255, 23, 68, 0.5),
-                0 0 120px rgba(194, 24, 91, 0.4);
+                0 0 30px rgba(255, 255, 255, 0.9),
+                0 0 60px rgba(255, 107, 157, 0.8),
+                0 0 90px rgba(255, 23, 68, 0.7),
+                0 0 120px rgba(236, 72, 153, 0.6),
+                0 0 150px rgba(99, 102, 241, 0.5);
             animation: textGlow 2s ease-in-out infinite;
-            letter-spacing: 5px;
+            letter-spacing: 8px;
             white-space: nowrap;
+            position: relative;
+        }
+
+        .text-glow::before {
+            content: 'مس نوران';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #ff6b9d 0%, #ff1744 50%, #ec4899 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            filter: blur(15px);
+            opacity: 0.6;
+            z-index: -1;
+            animation: textGlowBlur 2s ease-in-out infinite;
+        }
+
+        @keyframes textGlowBlur {
+            0%, 100% {
+                opacity: 0.6;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.8;
+                transform: scale(1.05);
+            }
         }
 
          @keyframes textGlow {
              0%, 100% {
                  text-shadow: 
-                     0 0 20px rgba(255, 255, 255, 0.9),
-                     0 0 40px rgba(255, 107, 157, 0.8),
-                     0 0 60px rgba(255, 23, 68, 0.7),
-                     0 0 80px rgba(255, 107, 157, 0.6),
-                     0 0 100px rgba(255, 23, 68, 0.5),
-                     0 0 120px rgba(194, 24, 91, 0.4);
+                     0 0 30px rgba(255, 255, 255, 0.9),
+                     0 0 60px rgba(255, 107, 157, 0.8),
+                     0 0 90px rgba(255, 23, 68, 0.7),
+                     0 0 120px rgba(236, 72, 153, 0.6),
+                     0 0 150px rgba(99, 102, 241, 0.5);
                  transform: scale(1);
+                 filter: brightness(1);
              }
              50% {
                  text-shadow: 
-                     0 0 30px rgba(255, 255, 255, 1),
-                     0 0 60px rgba(255, 107, 157, 1),
-                     0 0 90px rgba(255, 23, 68, 0.9),
-                     0 0 120px rgba(255, 107, 157, 0.8),
-                     0 0 150px rgba(255, 23, 68, 0.7),
-                     0 0 180px rgba(194, 24, 91, 0.6);
+                     0 0 40px rgba(255, 255, 255, 1),
+                     0 0 80px rgba(255, 107, 157, 1),
+                     0 0 120px rgba(255, 23, 68, 0.9),
+                     0 0 160px rgba(236, 72, 153, 0.8),
+                     0 0 200px rgba(99, 102, 241, 0.7);
                  transform: scale(1.05);
+                 filter: brightness(1.2);
              }
           }
 
@@ -481,6 +819,36 @@
             .inner-heart-4 {
                 width: 60px;
                 height: 60px;
+            }
+
+            .inner-heart-5 {
+                width: 45px;
+                height: 45px;
+            }
+
+            .inner-heart-6 {
+                width: 32px;
+                height: 32px;
+            }
+
+            .inner-heart-7 {
+                width: 22px;
+                height: 22px;
+            }
+
+            .inner-heart-8 {
+                width: 16px;
+                height: 16px;
+            }
+
+            .inner-heart-9 {
+                width: 11px;
+                height: 11px;
+            }
+
+            .inner-heart-10 {
+                width: 7px;
+                height: 7px;
             }
 
             .text-glow {
@@ -555,6 +923,36 @@
             .inner-heart-4 {
                 width: 50px;
                 height: 50px;
+            }
+
+            .inner-heart-5 {
+                width: 38px;
+                height: 38px;
+            }
+
+            .inner-heart-6 {
+                width: 28px;
+                height: 28px;
+            }
+
+            .inner-heart-7 {
+                width: 20px;
+                height: 20px;
+            }
+
+            .inner-heart-8 {
+                width: 14px;
+                height: 14px;
+            }
+
+            .inner-heart-9 {
+                width: 10px;
+                height: 10px;
+            }
+
+            .inner-heart-10 {
+                width: 6px;
+                height: 6px;
             }
 
             .text-glow {
@@ -712,6 +1110,20 @@
     <div class="container">
         <div class="heart">
             <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="heartGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#ff6b9d;stop-opacity:1" />
+                        <stop offset="50%" style="stop-color:#ff1744;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#ec4899;stop-opacity:1" />
+                    </linearGradient>
+                    <filter id="glow">
+                        <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+                        <feMerge>
+                            <feMergeNode in="coloredBlur"/>
+                            <feMergeNode in="SourceGraphic"/>
+                        </feMerge>
+                    </filter>
+                </defs>
                 <!-- الخط الخارجي -->
                 <path class="heart-outer" d="M100,170 C100,170 30,100 30,70 C30,50 50,30 70,30 C90,30 100,50 100,50 C100,50 110,30 130,30 C150,30 170,50 170,70 C170,100 100,170 100,170 Z" />
                 <!-- الخط الداخلي -->
@@ -729,6 +1141,39 @@
                     <path d="M100,170 C100,170 30,100 30,70 C30,50 50,30 70,30 C90,30 100,50 100,50 C100,50 110,30 130,30 C150,30 170,50 170,70 C170,100 100,170 100,170 Z" />
                 </svg>
                 <svg class="inner-heart inner-heart-4" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M100,170 C100,170 30,100 30,70 C30,50 50,30 70,30 C90,30 100,50 100,50 C100,50 110,30 130,30 C150,30 170,50 170,70 C170,100 100,170 100,170 Z" />
+                </svg>
+                <svg class="inner-heart inner-heart-5" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M100,170 C100,170 30,100 30,70 C30,50 50,30 70,30 C90,30 100,50 100,50 C100,50 110,30 130,30 C150,30 170,50 170,70 C170,100 100,170 100,170 Z" />
+                </svg>
+                <svg class="inner-heart inner-heart-6" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M100,170 C100,170 30,100 30,70 C30,50 50,30 70,30 C90,30 100,50 100,50 C100,50 110,30 130,30 C150,30 170,50 170,70 C170,100 100,170 100,170 Z" />
+                </svg>
+                <svg class="inner-heart inner-heart-7" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M100,170 C100,170 30,100 30,70 C30,50 50,30 70,30 C90,30 100,50 100,50 C100,50 110,30 130,30 C150,30 170,50 170,70 C170,100 100,170 100,170 Z" />
+                </svg>
+                <svg class="inner-heart inner-heart-8" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M100,170 C100,170 30,100 30,70 C30,50 50,30 70,30 C90,30 100,50 100,50 C100,50 110,30 130,30 C150,30 170,50 170,70 C170,100 100,170 100,170 Z" />
+                </svg>
+                <svg class="inner-heart inner-heart-9" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M100,170 C100,170 30,100 30,70 C30,50 50,30 70,30 C90,30 100,50 100,50 C100,50 110,30 130,30 C150,30 170,50 170,70 C170,100 100,170 100,170 Z" />
+                </svg>
+                <svg class="inner-heart inner-heart-10" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M100,170 C100,170 30,100 30,70 C30,50 50,30 70,30 C90,30 100,50 100,50 C100,50 110,30 130,30 C150,30 170,50 170,70 C170,100 100,170 100,170 Z" />
+                </svg>
+                <svg class="inner-heart inner-heart-11" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M100,170 C100,170 30,100 30,70 C30,50 50,30 70,30 C90,30 100,50 100,50 C100,50 110,30 130,30 C150,30 170,50 170,70 C170,100 100,170 100,170 Z" />
+                </svg>
+                <svg class="inner-heart inner-heart-12" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M100,170 C100,170 30,100 30,70 C30,50 50,30 70,30 C90,30 100,50 100,50 C100,50 110,30 130,30 C150,30 170,50 170,70 C170,100 100,170 100,170 Z" />
+                </svg>
+                <svg class="inner-heart inner-heart-13" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M100,170 C100,170 30,100 30,70 C30,50 50,30 70,30 C90,30 100,50 100,50 C100,50 110,30 130,30 C150,30 170,50 170,70 C170,100 100,170 100,170 Z" />
+                </svg>
+                <svg class="inner-heart inner-heart-14" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M100,170 C100,170 30,100 30,70 C30,50 50,30 70,30 C90,30 100,50 100,50 C100,50 110,30 130,30 C150,30 170,50 170,70 C170,100 100,170 100,170 Z" />
+                </svg>
+                <svg class="inner-heart inner-heart-15" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
                     <path d="M100,170 C100,170 30,100 30,70 C30,50 50,30 70,30 C90,30 100,50 100,50 C100,50 110,30 130,30 C150,30 170,50 170,70 C170,100 100,170 100,170 Z" />
                 </svg>
             </div>
@@ -823,8 +1268,123 @@
             }, 2000);
         }
 
+        // حساب طول المسار وتطبيق animation الرسم
+        function setupPathAnimation() {
+            // القلب الكبير - الخط الخارجي
+            const outerPath = document.querySelector('.heart-outer');
+            if (outerPath) {
+                const length = outerPath.getTotalLength();
+                outerPath.style.strokeDasharray = length;
+                outerPath.style.strokeDashoffset = length;
+            }
+
+            // القلب الكبير - الخط الداخلي
+            const innerPath = document.querySelector('.heart-inner');
+            if (innerPath) {
+                const length = innerPath.getTotalLength();
+                innerPath.style.strokeDasharray = length;
+                innerPath.style.strokeDashoffset = length;
+            }
+
+            // القلوب الداخلية
+            const innerHearts = document.querySelectorAll('.inner-heart path');
+            innerHearts.forEach((path, index) => {
+                const length = path.getTotalLength();
+                path.style.strokeDasharray = length;
+                path.style.strokeDashoffset = length;
+            });
+            
+            // تحديث القلوب الداخلية الجديدة بشكل منفصل
+            const innerHeart5 = document.querySelector('.inner-heart-5 path');
+            if (innerHeart5) {
+                const length = innerHeart5.getTotalLength();
+                innerHeart5.style.strokeDasharray = length;
+                innerHeart5.style.strokeDashoffset = length;
+            }
+            
+            const innerHeart6 = document.querySelector('.inner-heart-6 path');
+            if (innerHeart6) {
+                const length = innerHeart6.getTotalLength();
+                innerHeart6.style.strokeDasharray = length;
+                innerHeart6.style.strokeDashoffset = length;
+            }
+            
+            const innerHeart7 = document.querySelector('.inner-heart-7 path');
+            if (innerHeart7) {
+                const length = innerHeart7.getTotalLength();
+                innerHeart7.style.strokeDasharray = length;
+                innerHeart7.style.strokeDashoffset = length;
+            }
+            
+            const innerHeart8 = document.querySelector('.inner-heart-8 path');
+            if (innerHeart8) {
+                const length = innerHeart8.getTotalLength();
+                innerHeart8.style.strokeDasharray = length;
+                innerHeart8.style.strokeDashoffset = length;
+            }
+            
+            const innerHeart9 = document.querySelector('.inner-heart-9 path');
+            if (innerHeart9) {
+                const length = innerHeart9.getTotalLength();
+                innerHeart9.style.strokeDasharray = length;
+                innerHeart9.style.strokeDashoffset = length;
+            }
+            
+            const innerHeart10 = document.querySelector('.inner-heart-10 path');
+            if (innerHeart10) {
+                const length = innerHeart10.getTotalLength();
+                innerHeart10.style.strokeDasharray = length;
+                innerHeart10.style.strokeDashoffset = length;
+            }
+
+            const innerHeart11 = document.querySelector('.inner-heart-11 path');
+            if (innerHeart11) {
+                const length = innerHeart11.getTotalLength();
+                innerHeart11.style.strokeDasharray = length;
+                innerHeart11.style.strokeDashoffset = length;
+            }
+
+            const innerHeart12 = document.querySelector('.inner-heart-12 path');
+            if (innerHeart12) {
+                const length = innerHeart12.getTotalLength();
+                innerHeart12.style.strokeDasharray = length;
+                innerHeart12.style.strokeDashoffset = length;
+            }
+
+            const innerHeart13 = document.querySelector('.inner-heart-13 path');
+            if (innerHeart13) {
+                const length = innerHeart13.getTotalLength();
+                innerHeart13.style.strokeDasharray = length;
+                innerHeart13.style.strokeDashoffset = length;
+            }
+
+            const innerHeart14 = document.querySelector('.inner-heart-14 path');
+            if (innerHeart14) {
+                const length = innerHeart14.getTotalLength();
+                innerHeart14.style.strokeDasharray = length;
+                innerHeart14.style.strokeDashoffset = length;
+            }
+
+            const innerHeart15 = document.querySelector('.inner-heart-15 path');
+            if (innerHeart15) {
+                const length = innerHeart15.getTotalLength();
+                innerHeart15.style.strokeDasharray = length;
+                innerHeart15.style.strokeDashoffset = length;
+            }
+
+            // قلوب الخلفية
+            const bgHearts = document.querySelectorAll('.bg-heart path');
+            bgHearts.forEach((path) => {
+                const length = path.getTotalLength();
+                path.style.strokeDasharray = length;
+                path.style.strokeDashoffset = length;
+            });
+        }
+
         // إطلاق الألعاب النارية عند تحميل الصفحة
         window.addEventListener('load', function() {
+            // إعداد animation الرسم
+            setTimeout(setupPathAnimation, 100);
             const positions = [
                 { x: window.innerWidth * 0.2, y: window.innerHeight * 0.3 },
                 { x: window.innerWidth * 0.5, y: window.innerHeight * 0.2 },
